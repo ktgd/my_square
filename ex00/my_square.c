@@ -13,6 +13,7 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <ctype.h>
+#include <stddef.h>
 
 /*char** f(int w, int h) // I should create the string j, concatenate the strings j - 1 and j (e.g. strcat(s[j], '\n')), repeat and terminate the string (e.g. if ( j == h && i == w ) { i += 1; *s[i] = '\0'; }).
 {
@@ -66,18 +67,18 @@ void draw(int w, int h)
 
 void draw(int w, int h)
 {
-    int i = 0;
-    int j = 0;
+    int i = 1;
+    int j = 1;
 
     while ( j <= h )
     {
-        if ( j == 0 || j == h )
+        if ( j == 1 || j == h )
         {
-            while ( 0 <= i && i <= w )
+            while ( 1 <= i && i <= w )
             {
-                if ( i == 0 )
+                if ( i == 1 )
                     putchar('o');
-                else if ( 0 < i && i < w )
+                else if ( 1 < i && i < w )
                     putchar('-');
                 else// if ( i == w )
                 {
@@ -86,15 +87,15 @@ void draw(int w, int h)
                 }
                 i++;
             }
-            i = 0;
+            i = 1;
         }
-        else if ( 0 < j && j < h )
+        else if ( 1 < j && j < h )
         {
-            while ( 0 <= i && i <= w )
+            while ( 1 <= i && i <= w )
             {
-                if ( i == 0 )
+                if ( i == 1 )
                     putchar('|');
-                else if ( 0 < i && i < w )
+                else if ( 1 < i && i < w )
                     putchar(' ');
                 else// if ( i == w )
                 {
@@ -103,7 +104,7 @@ void draw(int w, int h)
                 }
                 i++;
             }
-            i = 0;
+            i = 1;
         }
         j++;
     }
@@ -112,8 +113,10 @@ void draw(int w, int h)
 
 int main(int ac, char **av)
 {
-    if ( ac != 3 || !isdigit(*av[1]) || !isdigit(*av[2]) )
-        return 1;
+    if ( ac != 3 || !*av[1] || !*av[2] )
+        return 0;
+    else if ( ac != 3 || !isdigit(*av[1]) || !isdigit(*av[2]) )
+        return 0;
     else
     {
         int x = atoi(av[1]);
